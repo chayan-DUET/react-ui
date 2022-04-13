@@ -1,4 +1,5 @@
 import React from "react";
+import {Switch, Route, Routes, Redirect} from "react-router-dom";
 import '../../assets/admin/css/styles.css'
 import '../../assets/admin/js/scripts';
 import Footer from "./Footer";
