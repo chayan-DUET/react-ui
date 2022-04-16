@@ -1,10 +1,12 @@
 import React from "react";
-import {Switch, Route, Routes, Redirect} from "react-router-dom";
+//import {Switch, Route, Routes, Redirect} from "react-router-dom";
+import {Route, Redirect, Switch } from "react-router-dom";
 import '../../assets/admin/css/styles.css'
 import '../../assets/admin/js/scripts';
 import Footer from "./Footer";
 import Navebar from './Navbar';
 import Sidebar from "./Sidebar";
+import routes from "../../routes/routes";
 const MasterLayout = () =>{
     return (
         <div className="sb-nav-fixed">
@@ -15,7 +17,25 @@ const MasterLayout = () =>{
                 </div> 
                 <div id="layoutSidenav_content">
                     <main>
-                        hi
+                    <Switch>
+                            {routes.map((route, index) =>{
+                                return(
+                                    route.component && (
+                                        <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        name={route.name}
+                                        render={(props) => (
+                                            <route.component {...props}/>
+                                        )}
+                                        />
+                                    )
+                                )
+                            })}
+                            <Redirect from ="admin" to="/admin/dashboard" />
+                            
+                    </Switch>
                     </main>
                     <Footer/>
                 </div>
@@ -23,4 +43,4 @@ const MasterLayout = () =>{
         </div>
     )
 }
-export default MasterLayout;
+export default MasterLayout; 
